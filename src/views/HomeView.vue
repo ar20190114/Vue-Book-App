@@ -44,7 +44,7 @@
 
         <v-list>
           <v-list-item>
-            <v-btn variant="plain">profile</v-btn>
+            <v-btn to="/profile" variant="plain">profile</v-btn>
           </v-list-item>
           <v-divider />
           <v-list-item>
