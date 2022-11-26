@@ -4,7 +4,7 @@
       <v-app-bar-nav-icon></v-app-bar-nav-icon>
 
       <v-toolbar-title>Application</v-toolbar-title>
-
+      <v-btn to="/book/form"> form book </v-btn>
       <v-spacer></v-spacer>
 
       <v-btn icon>
