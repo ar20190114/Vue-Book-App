@@ -32,7 +32,7 @@ createApp(App).use(vuetify).mount('#app')
 
 ### mdi Install
 ```
- npm install @mdi/font -D
+ npm i @mdi/font
 ```
 
 ### Compiles and hot-reloads for development
