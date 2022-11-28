@@ -30,7 +30,7 @@ const vuetify = createVuetify({
 createApp(App).use(vuetify).mount('#app')
 ```
 
-### mdi install
+### mdi Install
 ```
  npm install @mdi/font -D
 ```
