@@ -20,11 +20,6 @@
             label="Item"
           ></v-select>
 
-          <v-textarea
-            v-model="bookInformation.bookComment"
-            label="コメント"
-          ></v-textarea>
-
           <div class="text-center">
             <p>評価</p>
             <v-rating
@@ -60,7 +55,6 @@ const bookInformation = reactive({
   bookTitle: "",
   bookAuthor: "",
   bookItems: ["小説", "自己啓発", "理学書"],
-  bookComment: "",
   bookRating: 0,
 });
 
@@ -68,7 +62,6 @@ function resetForm() {
   bookInformation.bookTitle = "";
   bookInformation.bookAuthor = "";
   bookSubject.value = "";
-  bookInformation.bookComment = "";
   bookInformation.bookRating = 0;
 }
 
@@ -78,7 +71,6 @@ async function postForm() {
       title: bookInformation.bookTitle,
       author: bookInformation.bookAuthor,
       rating: bookInformation.bookRating,
-      comment: bookInformation.bookComment,
       item: bookSubject.value,
     });
     console.log("Document written with ID: ", docRef.id);
@@ -90,13 +82,13 @@ async function postForm() {
 </script>
 <style scoped>
 .card-box {
-  width: 80%;
+  width: 60%;
   margin: 0 auto;
   color: white;
 }
 
 .card {
-  padding-top: 50px;
+  padding-top: 150px;
   background-color: black;
   height: 100vh;
   color: white;
