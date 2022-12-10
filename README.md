@@ -7,7 +7,7 @@ npm install
 
 ### Vuetify3 Install
 ```
-npm install vuetify
+npm install vuetify@^3.0.4
 ```
 
 ```
