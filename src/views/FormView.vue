@@ -20,12 +20,6 @@
             label="Item"
           ></v-select>
 
-          <v-file-input
-            label="画像"
-            variant="filled"
-            prepend-icon="mdi-camera"
-          ></v-file-input>
-
           <v-textarea
             v-model="bookInformation.bookComment"
             label="コメント"
@@ -48,7 +42,7 @@
           <v-btn color="error" class="mr-4" @click="resetForm">
             Reset Form
           </v-btn>
-          <v-btn color="success" class="mr-4"> create </v-btn>
+          <v-btn color="success" class="mr-4" @click="postForm"> create </v-btn>
         </div>
       </v-card-actions>
     </div>
@@ -57,6 +51,9 @@
 
 <script setup lang="ts">
 import { Ref, ref, reactive } from "vue";
+import { collection, addDoc } from "firebase/firestore";
+import db from "../firebase.js";
+import router from "@/router";
 
 const bookSubject: Ref<string> = ref("");
 const bookInformation = reactive({
@@ -73,6 +70,22 @@ function resetForm() {
   bookSubject.value = "";
   bookInformation.bookComment = "";
   bookInformation.bookRating = 0;
+}
+
+async function postForm() {
+  try {
+    const docRef = await addDoc(collection(db, "booklist"), {
+      title: bookInformation.bookTitle,
+      author: bookInformation.bookAuthor,
+      rating: bookInformation.bookRating,
+      comment: bookInformation.bookComment,
+      item: bookSubject.value,
+    });
+    console.log("Document written with ID: ", docRef.id);
+  } catch (e) {
+    console.error("Error adding document: ", e);
+  }
+  await router.push({ name: "home" });
 }
 </script>
 <style scoped>
