@@ -66,10 +66,18 @@
   </v-app>
 </template>
 
-<script>
-export default {
-  //
-};
+<script setup lang="ts">
+import { onMounted } from "vue";
+import db from "../firebase.js";
+import { collection, getDocs } from "firebase/firestore";
+
+onMounted(async () => {
+  const querySnapshot = await getDocs(collection(db, "booklist"));
+  querySnapshot.forEach((doc) => {
+    console.log(doc.id);
+    console.log(doc.data());
+  });
+});
 </script>
 <style scoped>
 .app-bar {
@@ -85,10 +93,5 @@ export default {
 
 .main {
   background-color: black;
-}
-
-.list-item-contanier {
-  position: relative;
-  text-align: center;
 }
 </style>
