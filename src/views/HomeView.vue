@@ -57,8 +57,19 @@
     <v-main class="main">
       <v-container>
         <v-row>
-          <v-col v-for="n in 24" :key="n" cols="4">
-            <v-card class="card" height="200"></v-card>
+          <v-col v-for="data in dataList" :key="data.id" cols="4">
+            <v-card class="card" height="200">
+              <div class="card-items">
+                <p>{{ data.title }}</p>
+                <p>{{ data.author }}</p>
+                <v-icon
+                  v-if="data.rating >= 3"
+                  icon="mdi-thumb-up"
+                  color="blue-lighten-2"
+                />
+                <v-icon v-else icon="mdi-thumb-down" color="red-lighten-2" />
+              </div>
+            </v-card>
           </v-col>
         </v-row>
       </v-container>
@@ -67,16 +78,18 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted } from "vue";
+import { onMounted, ref } from "vue";
 import db from "../firebase.js";
 import { collection, getDocs } from "firebase/firestore";
 
+const dataList = ref([]);
+
 onMounted(async () => {
   const querySnapshot = await getDocs(collection(db, "booklist"));
-  querySnapshot.forEach((doc) => {
-    console.log(doc.id);
-    console.log(doc.data());
-  });
+  for (let i = 0; i < querySnapshot.docs.length; i++) {
+    dataList.value.push(querySnapshot.docs[i].data());
+  }
+  console.log(dataList.value);
 });
 </script>
 <style scoped>
