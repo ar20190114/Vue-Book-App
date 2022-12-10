@@ -10,19 +10,30 @@
 
         <v-list>
           <v-list-item>
-            <v-btn variant="plain">All</v-btn>
+            <v-btn variant="plain" @click="allBookList(onmountDataList)">
+              All
+            </v-btn>
           </v-list-item>
           <v-divider />
           <v-list-item>
-            <v-btn variant="plain">novel</v-btn>
+            <v-btn variant="plain" @click="novelBookList(onmountDataList)">
+              novel
+            </v-btn>
           </v-list-item>
           <v-divider />
           <v-list-item>
-            <v-btn variant="plain">enlightenment</v-btn>
+            <v-btn
+              variant="plain"
+              @click="enlightenmentBookList(onmountDataList)"
+            >
+              enlightenment
+            </v-btn>
           </v-list-item>
           <v-divider />
           <v-list-item>
-            <v-btn variant="plain">science</v-btn>
+            <v-btn variant="plain" @click="scienceBookList(onmountDataList)">
+              science
+            </v-btn>
           </v-list-item>
         </v-list>
       </v-menu>
@@ -83,14 +94,53 @@ import db from "../firebase.js";
 import { collection, getDocs } from "firebase/firestore";
 
 const dataList = ref([]);
+const onmountDataList = ref([]);
 
 onMounted(async () => {
   const querySnapshot = await getDocs(collection(db, "booklist"));
   for (let i = 0; i < querySnapshot.docs.length; i++) {
     dataList.value.push(querySnapshot.docs[i].data());
+    onmountDataList.value.push(querySnapshot.docs[i].data());
   }
   console.log(dataList.value);
 });
+
+function allBookList(data: []) {
+  dataList.value.splice(0);
+  for (let i = 0; i < onmountDataList.value.length; i++) {
+    dataList.value.push(onmountDataList.value[i]);
+  }
+}
+
+function novelBookList(data: []) {
+  dataList.value.splice(0);
+  for (let i = 0; i < onmountDataList.value.length; i++) {
+    if (onmountDataList.value[i].item === "小説") {
+      dataList.value.push(onmountDataList.value[i]);
+    }
+  }
+  console.log(dataList.value);
+}
+
+async function enlightenmentBookList(data: []) {
+  dataList.value.splice(0);
+  for (let i = 0; i < onmountDataList.value.length; i++) {
+    if (onmountDataList.value[i].item === "自己啓発") {
+      dataList.value.push(onmountDataList.value[i]);
+    }
+  }
+  console.log(dataList.value);
+}
+
+async function scienceBookList(data: []) {
+  dataList.value.splice(0);
+  for (let i = 0; i < onmountDataList.value.length; i++) {
+    if (onmountDataList.value[i].item === "理学書") {
+      dataList.value.push(onmountDataList.value[i]);
+    }
+  }
+  console.log(dataList.value);
+}
 </script>
 <style scoped>
 .app-bar {
