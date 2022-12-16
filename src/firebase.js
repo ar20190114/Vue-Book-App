@@ -1,16 +1,13 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 
-require("dotenv").config();
-
-
 const firebaseConfig = {
-  apiKey: process.env.API_KEY,
-  authDomain: process.env.AUTH_DOMAIN,
-  projectId: process.env.PROJECT_ID,
-  storageBucket: process.env.STORAGE_BUCKET,
-  messagingSenderId: process.env.MESSAGING_SENDER_ID,
-  appId: process.env.APP_ID,
+  apiKey: "AIzaSyDOXi95SsM1xXVXpdM0C1G_n1C_yVUXG0Q",
+  authDomain: "book-shelf-975ae.firebaseapp.com",
+  projectId: "book-shelf-975ae",
+  storageBucket: "book-shelf-975ae.appspot.com",
+  messagingSenderId: "496024871523",
+  appId: "1:496024871523:web:16e0a6fbed380e8653ce56",
 };
 
 // Initialize Firebase
